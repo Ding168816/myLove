@@ -7,11 +7,11 @@ module.exports = {
     extend: {
       colors: {
         love: {
-          primary: '#FF6B6B',
-          secondary: '#4ECDC4',
-          accent: '#FFD166',
-          dark: '#2A2D34',
-          light: '#F7FFF7'
+          primary: '#FF85A2',  // 柔和的粉色
+          secondary: '#F8A5C2', // 温暖的浅粉色
+          accent: '#FDCB6E',    // 柔和的珊瑚色
+          dark: '#2D3436',      // 深灰色
+          light: '#FFF8F8'      // 温暖的浅粉色背景
         },
       },
       fontFamily: {

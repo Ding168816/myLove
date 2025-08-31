@@ -17,7 +17,8 @@ export default defineConfig({
     }
   },
   server: {
-    port: 3000,
+    port: 8080,
+    strictPort: true,
     open: true,
     // 确保静态资源能被正确访问
     fs: {

@@ -15,6 +15,19 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="font-sans bg-love-light text-gray-800">
+  <!-- 浪漫风格加载动画 -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-hearts">
+      <div class="loading-heart">💖</div>
+      <div class="loading-heart">💘</div>
+      <div class="loading-heart">💓</div>
+      <div class="loading-heart">💕</div>
+    </div>
+    <div class="loading-text">
+      正在打开我们的回忆...
+    </div>
+  </div>
+
   <!-- 爱心雨容器 -->
   <div id="hearts-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50"></div>
 
@@ -101,9 +114,20 @@
   </section>
 
   <!-- 主内容页面 -->
-  <main id="main-content" class="hidden">
+  <main id="main-content" class="hidden scroll-smooth">
+    <!-- 导航栏 -->
+    <nav class="nav-bar">
+      <ul class="nav-links">
+        <li><a href="#header" class="nav-link" title="首页">💗</a></li>
+        <li><a href="#timeline" class="nav-link" title="时间线">💕</a></li>
+        <li><a href="#gallery" class="nav-link" title="相册">💖</a></li>
+        <li><a href="#love-letter" class="nav-link" title="情书">💓</a></li>
+        <li><a href="#countdown" class="nav-link" title="倒计时">💘</a></li>
+      </ul>
+    </nav>
+    
     <!-- 头部区域 -->
-    <header class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <header id="header" class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden section">
       <div class="absolute inset-0 bg-gradient-to-br from-love-primary/20 to-love-secondary/20 z-0"></div>
       
       <!-- 背景爱心装饰 -->
@@ -140,7 +164,7 @@
     </header>
 
     <!-- 时间线区域 -->
-    <section id="timeline" class="py-20 bg-white">
+    <section id="timeline" class="bg-white section">
       <div class="container mx-auto px-4">
         <h2 class="text-4xl font-romantic text-center text-love-primary mb-16">我们的爱情时间线💞</h2>
         
@@ -195,7 +219,7 @@
     </section>
 
     <!-- 相册区域 -->
-    <section id="gallery" class="py-20 bg-love-light">
+    <section id="gallery" class="bg-love-light section">
       <div class="container mx-auto px-4">
         <h2 class="text-4xl font-romantic text-center text-love-primary mb-16">我们的美好回忆❤️‍🔥</h2>
         
@@ -363,7 +387,7 @@
     </section>
 
 <!-- 情书区域 - 信封样式 -->
-<section id="love-letter" class="py-20 bg-white">
+<section id="love-letter" class="py-20 bg-white section">
   <div class="container mx-auto px-4">
     <div class="max-w-3xl mx-auto">
       <h2 class="text-4xl font-romantic text-center text-love-primary mb-8">致艳宝😘</h2>
@@ -395,7 +419,7 @@
 </section>
 
     <!-- 倒计时区域 -->
-    <section id="countdown" class="py-20 bg-gradient-to-br from-love-primary/20 to-love-secondary/20">
+    <section id="countdown" class="py-20 bg-gradient-to-br from-love-primary/20 to-love-secondary/20 section">
       <div class="container mx-auto px-4 text-center">
         <h2 class="text-4xl font-romantic text-center text-love-primary mb-10 animate-heartbeat">我们已经在一起 <span class="heartbeat-animation inline-block">💓</span></h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
@@ -422,7 +446,7 @@
     <!-- 互动功能已移除 -->
 
     <!-- 页脚区域 -->
-    <footer class="py-10 bg-love-dark text-red text-center">
+    <footer id="footer" class="py-10 bg-love-dark text-red text-center section">
       <div class="container mx-auto px-4">
         <!-- <p class="mb-4">我们的三周年 & 七夕纪念</p> -->
         <div class="flex justify-center space-x-4 mb-6">
@@ -450,6 +474,23 @@
 
   <!-- 脚本 -->
   <script>
+    // 页面加载时显示加载动画
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadingScreen = document.querySelector('.loading-screen');
+      if (loadingScreen) {
+        // 只在首次加载网页时显示加载动画
+        loadingScreen.classList.remove('hidden');
+        
+        // 2秒后隐藏加载动画，显示密码验证页面
+        setTimeout(() => {
+          loadingScreen.classList.add('opacity-0');
+          setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+          }, 500);
+        }, 2000);
+      }
+    });
+    
     // 配置项
     const CONFIG = {
       // 默认纪念日，用于演示目的
@@ -999,7 +1040,9 @@
           // 创建进入动画效果
           UTILS.createEnvelopeHeartAnimation();
           
+          // 延迟显示加载动画后再显示主内容
           setTimeout(() => {
+            // 直接隐藏密码页，显示主内容
             ELEMENTS.passwordPage.classList.add('hidden');
             ELEMENTS.mainContent.classList.remove('hidden');
             // 初始化倒计时
@@ -1007,7 +1050,19 @@
             setInterval(UTILS.calculateTogetherTime, 1000);
             // 启动相册滚动
             UTILS.startGalleryScroll();
-          }, 1000);
+            
+            // 初始化检查可见性
+            setTimeout(() => {
+              const navBar = document.querySelector('.nav-bar');
+              if (navBar) {
+                // 延迟显示导航栏
+                setTimeout(() => {
+                  navBar.classList.add('visible');
+                }, 1500);
+              }
+              checkVisibility();
+            }, 500);
+          }, 2000);
         } else {
           // 日期验证失败，显示可爱风格的错误提示框
           console.log('Date validation failed, showing cute error');
@@ -1221,19 +1276,120 @@
         // 分享按钮
         ELEMENTS.shareButton.addEventListener('click', UTILS.sharePage);
         
-        // 平滑滚动
+        // 平滑滚动 - 考虑导航栏高度
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
           anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-              window.scrollTo({ 
-                top: target.offsetTop, 
+              // 考虑导航栏高度的偏移
+              const navHeight = 80; // 导航栏大约高度
+              const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+              
+              window.scrollTo({
+                top: targetPosition,
                 behavior: 'smooth'
               });
             }
           });
         });
+        
+        // 扩展STATE对象，添加滚动相关状态
+        STATE.isScrolling = false;
+        STATE.lastScrollTime = 0;
+
+        // 处理滚动事件，使用防抖技术
+        function handleScroll() {
+          const navBar = document.querySelector('.nav-bar');
+          
+          // 标记正在滚动
+          STATE.isScrolling = true;
+          STATE.lastScrollTime = Date.now();
+          
+          // 显示导航栏
+          if (navBar) {
+            navBar.classList.add('visible');
+          }
+          
+          // 检查元素可见性
+          checkVisibility();
+          
+          // 设置超时，滚动停止后隐藏导航栏
+          setTimeout(() => {
+            if (Date.now() - STATE.lastScrollTime > 2000) {
+              STATE.isScrolling = false;
+              if (navBar) {
+                navBar.classList.remove('visible');
+              }
+            }
+          }, 2000);
+        }
+
+        // 检查元素是否在视口中
+        function checkVisibility() {
+          const sections = document.querySelectorAll('.section');
+          
+          sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            
+            // 当元素进入视口一定比例时添加可见类
+            if (rect.top <= windowHeight * 0.75 && rect.bottom >= 0) {
+              section.classList.add('visible');
+            }
+          });
+        }
+        
+        // 初始化时检查可见性
+        setTimeout(checkVisibility, 100);
+        
+        // 添加滚动事件监听，使用节流优化
+        let lastScrollTop = 0;
+        const scrollThreshold = 50; // 滚动阈值
+        
+        window.addEventListener('wheel', (e) => {
+          // 单页滚动逻辑 - 只允许垂直滚动
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.preventDefault();
+            
+            const sections = document.querySelectorAll('.section');
+            const currentScrollPos = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            
+            // 向下滚动
+            if (e.deltaY > 0) {
+              for (let i = 0; i < sections.length; i++) {
+                const sectionTop = sections[i].offsetTop;
+                if (currentScrollPos < sectionTop - windowHeight / 3) {
+                  window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                  break;
+                } else if (i === sections.length - 1 && currentScrollPos >= sectionTop - windowHeight / 3) {
+                  // 已经在最后一页，不执行滚动
+                }
+              }
+            }
+            // 向上滚动
+            else {
+              for (let i = sections.length - 1; i >= 0; i--) {
+                const sectionTop = sections[i].offsetTop;
+                if (currentScrollPos > sectionTop + windowHeight / 3) {
+                  window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                  break;
+                } else if (i === 0 && currentScrollPos <= sectionTop + windowHeight / 3) {
+                  // 已经在第一页，滚动到顶部
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }
+            }
+            
+            // 处理导航栏显示
+            handleScroll();
+          }
+        }, { passive: false });
+        
+        // 监听滚动事件以更新导航栏状态
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', checkVisibility);
 
         // 全局点击一次性触发音乐播放
         document.addEventListener('click', () => {
@@ -1385,8 +1541,8 @@
       }, 1000);
       
       // 添加进入动画和全局光标样式
-        const style = document.createElement('style');
-        style.textContent = `
+      const style = document.createElement('style');
+      style.textContent = `
           /* 确保整个页面不会出现文本光标 */
           * {
             cursor: default !important;
