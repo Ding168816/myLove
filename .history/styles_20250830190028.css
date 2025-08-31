@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义工具类 */
+@layer utilities {
+  .content-auto {
+    content-visibility: auto;
+  }
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  }
+  .transition-transform-opacity {
+    transition-property: transform, opacity;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .page-transition {
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+    /* 樱花边框样式 - 修复布局问题 */
+    .cherry-blossom-border {
+      position: relative;
+      overflow: visible;
+      padding: 24px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+  
+    /* 顶部边框 - 修复显示问题 */
+    .cherry-blossom-border::before {
+      content: "🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸";
+      position: absolute;
+      top: -4px;
+      left: 0;
+      right: 0;
+      height: 28px;
+      font-size: 24px;
+      white-space: nowrap;
+      animation: scroll-horizontal 20s linear infinite;
+      display: block;
+      width: 100%;
+      /* 设置为100% */
+      z-index: 15;
+      line-height: 28px;
+      background: none;
+    }
+  
+    /* 底部边框 - 修复显示问题 */
+    .cherry-blossom-border::after {
+      content: "🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸🌸";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 28px;
+      font-size: 24px;
+      white-space: nowrap;
+      animation: scroll-horizontal 20s linear infinite reverse;
+      display: block;
+      width: 100%;
+      /* 设置为100% */
+      z-index: 15;
+      line-height: 28px;
+      background: none;
+    }
+  
+    /* 左边框 - 确保垂直排列和显示 */
+    .cherry-blossom-border-left::before {
+      content: "🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸";
+      position: absolute;
+      top: 0;
+      left: -4px;
+      width: 28px;
+      height: calc(100% + 8px);
+      font-size: 24px;
+      white-space: pre;
+      animation: scroll-vertical 15s linear infinite;
+      display: block;
+      z-index: 15;
+      line-height: 1.2;
+      background: none;
+    }
+  
+    /* 右边框 - 修复紧贴问题 */
+    .cherry-blossom-border-right::after {
+      content: "🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸\A🌸";
+      position: absolute;
+      top: 0;
+      right: -4px;
+      width: 28px;
+      height: calc(100% + 8px);
+      font-size: 24px;
+      white-space: pre;
+      animation: scroll-vertical 15s linear infinite reverse;
+      display: block;
+      z-index: 15;
+      line-height: 1.2;
+      background: none;
+    }
+  
+    /* 樱花边框容器 - 调整确保边框正确显示 */
+    .cherry-blossom-border-container {
+      position: relative;
+      /* 确保伪元素相对于父元素定位 */
+      overflow: visible;
+      padding: 0;
+      margin: 2rem auto;
+      display: inline-block;
+      z-index: 10;
+    }
+  
+  /* 滚动动画 - 恢复 */
+  @keyframes scroll-horizontal {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes scroll-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-30%);
+    }
+  }
+  
+  /* 爱心弹出动画 */
+  @keyframes heart-pop {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5) translateY(-20px);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1) translateY(-40px);
+      opacity: 0;
+    }
+  }
+  .heart-pop-animation {
+    animation: heart-pop 1s ease-out forwards;
+  }
+}
+
+/* 全局样式 */
+body {
+  overflow-x: hidden;
+  background-color: #F7FFF7;
+}
+
+/* 全屏页面滚动样式 */
+.full-page {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* 动画定义 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-slow-animation {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.heartbeat-animation {
+  animation: heartbeat 1s ease-in-out infinite;
+}
+

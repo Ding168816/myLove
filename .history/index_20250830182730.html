@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我们的三周年</title>
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans bg-love-light text-gray-800">
+  <!-- 爱心雨容器 -->
+  <div id="hearts-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-50"></div>
+
+  <!-- 密码保护页面 - 直接显示日期表单 -->
+  <section id="password-page" class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-love-primary/90 to-love-secondary/90 z-100 overflow-hidden">
+    <!-- 背景爱心粒子 -->
+    <div class="absolute inset-0" id="particle-container"></div>
+    
+    <!-- 日期输入表单 -->
+    <div id="date-form-container"
+      class="hidden bg-white/95 p-8 rounded-2xl shadow-xl max-w-md w-full mx-auto z-20 flex flex-col items-center cherry-blossom-border cherry-blossom-border-left cherry-blossom-border-right"
+      style="min-width: 360px; width: 90%; max-width: 450px; transition: all 0.5s ease; padding: 2rem; margin: 2rem auto;">
+        <div class="text-center mb-6">
+          <h2 class="text-3xl md:text-4xl font-romantic text-love-primary mb-2">我们的纪念日</h2>
+        </div>
+        <form id="password-form" class="space-y-4">
+          <div>
+            <input type="date" id="anniversary-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-love-primary focus:border-love-primary transition-all">
+          </div>
+          <button type="submit" class="w-full bg-love-primary hover:bg-love-primary/90 text-pink-300 font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-love-primary focus:ring-opacity-50">
+            开启回忆之旅
+          </button>
+        </form>
+        <p id="error-message" class="text-red-500 text-sm mt-3 text-center hidden">日期不正确，请重试</p>
+      </div>
+    
+    <!-- 爱心快捷入口 -->
+    <div class="quick-access absolute bottom-10 left-0 right-0 text-center">
+      <div class="flex justify-center gap-8">
+        <div class="love-shortcut" data-target="gallery" title="查看我们的照片集">
+          <div class="w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center cursor-pointer shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl">
+            <i class="fa fa-picture-o text-2xl text-love-primary"></i>
+          </div>
+          <p class="mt-2 text-red">美好回忆</p>
+        </div>
+        <div class="love-shortcut" data-target="love-letter" title="阅读我的情书">
+          <div class="w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center cursor-pointer shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl">
+            <i class="fa fa-heart text-2xl text-love-primary"></i>
+          </div>
+          <p class="mt-2 text-red">爱的情书</p>
+        </div>
+        <div class="love-shortcut" data-target="countdown" title="查看我们在一起的时光">
+          <div class="w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center cursor-pointer shadow-lg transform transition-all duration-300 hover:scale-110 hover:shadow-xl">
+            <i class="fa fa-clock-o text-2xl text-love-primary"></i>
+          </div>
+          <p class="mt-2 text-red">时光记忆</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主内容页面 -->
+  <main id="main-content" class="hidden">
+    <!-- 头部区域 -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-love-primary/20 to-love-secondary/20 z-0"></div>
+      
+      <!-- 背景爱心装饰 -->
+      <div class="absolute inset-0 opacity-10 z-0">
+        <div class="absolute top-1/4 left-1/4 text-9xl text-love-primary">❤</div>
+        <div class="absolute top-2/3 right-1/4 text-8xl text-love-secondary">❤</div>
+        <div class="absolute bottom-1/4 left-1/3 text-7xl text-love-accent">❤</div>
+      </div>
+      
+      <div class="container mx-auto px-4 z-10 text-center">
+        <h1 class="text-5xl md:text-7xl font-romantic text-love-primary mb-6 text-shadow-lg">
+          三周年快乐 <span class="heartbeat-animation inline-block">❤</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          与你相遇的每一天都是奇迹，感谢你陪伴我走过这三年时光
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button id="play-music" class="bg-love-primary hover:bg-love-primary/90 text-red font-medium py-2 px-6 rounded-full transition-all transform hover:scale-105 flex items-center gap-2">
+            <i class="fa fa-music"></i>
+            <span>播放音乐</span>
+          </button>
+          <a href="#gallery" class="bg-white hover:bg-gray-50 text-love-primary border border-love-primary font-medium py-2 px-6 rounded-full transition-all transform hover:scale-105 flex items-center gap-2">
+            <i class="fa fa-image"></i>
+            <span>浏览回忆</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+        <a href="#timeline" class="text-love-primary text-3xl">
+          <i class="fa fa-angle-down"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- 时间线区域 -->
+    <section id="timeline" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-romantic text-center text-love-primary mb-16">我们的爱情时间线</h2>
+        
+        <div class="relative">
+          <!-- 中间线 -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-love-primary/30"></div>
+          
+          <!-- 时间点 -->
+          <div class="space-y-16">
+            <!-- 时间点1 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                <h3 class="text-2xl font-romantic text-love-primary mb-2">初次相遇</h3>
+                <p class="text-gray-600">那一天，我的世界因你而变得不同。你的笑容如同阳光般温暖，让我无法忘怀。</p>
+              </div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-love-primary border-4 border-white z-10"></div>
+              <div class="md:w-1/2 md:pl-12"></div>
+            </div>
+            
+            <!-- 时间点2 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12"></div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-love-primary border-4 border-white z-10"></div>
+              <div class="md:w-1/2 md:pl-12 mt-6 md:mt-0">
+                <h3 class="text-2xl font-romantic text-love-primary mb-2">第一次约会</h3>
+                <p class="text-gray-600">我们一起看了一场电影，分享了一桶爆米花。那是我度过的最美好的夜晚之一。</p>
+              </div>
+            </div>
+            
+            <!-- 时间点3 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                <h3 class="text-2xl font-romantic text-love-primary mb-2">确定关系</h3>
+                <p class="text-gray-600">当我们四目相对时，我知道你就是我想要共度一生的人。那一刻，我感到无比幸福。</p>
+              </div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-love-primary border-4 border-white z-10"></div>
+              <div class="md:w-1/2 md:pl-12"></div>
+            </div>
+            
+            <!-- 时间点4 -->
+            <div class="relative flex flex-col md:flex-row items-center">
+              <div class="md:w-1/2 md:pr-12"></div>
+              <div class="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-love-primary border-4 border-white z-10"></div>
+              <div class="md:w-1/2 md:pl-12 mt-6 md:mt-0">
+                <h3 class="text-2xl font-romantic text-love-primary mb-2">三周年纪念</h3>
+                <p class="text-gray-600">时间飞逝，但我的爱与日俱增。感谢你陪伴我走过这三年，期待未来的每一个三年。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 相册区域 -->
+    <section id="gallery" class="py-20 bg-love-light">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-romantic text-center text-love-primary mb-16">我们的美好回忆</h2>
+        
+      <!-- 相册切换器 -->
+      <div class="flex justify-center mb-10 space-x-2">
+        <button
+          class="gallery-tab active px-4 py-2 rounded-full bg-pink-100 text-love-primary hover:bg-pink-200 shadow-md hover:shadow-lg hover:scale-105 transition-all"
+          data-tab="tab1">甜蜜瞬间</button>
+        <button
+          class="gallery-tab px-4 py-2 rounded-full bg-pink-100 text-love-primary hover:bg-pink-200 shadow-md hover:shadow-lg hover:scale-105 transition-all"
+          data-tab="tab2">旅行足迹</button>
+        <button
+          class="gallery-tab px-4 py-2 rounded-full bg-pink-100 text-love-primary hover:bg-pink-200 shadow-md hover:shadow-lg hover:scale-105 transition-all"
+          data-tab="tab3">日常点滴</button>
+      </div>
+
+        
+        <!-- 相册内容 -->
+        <div class="gallery-content">
+          <!-- 甜蜜瞬间 -->
+          <div id="tab1" class="gallery-tab-content active">
+            <div class="gallery-scroll-container overflow-hidden">
+              <div class="gallery-scroll-track flex gap-6 transition-transform duration-10000 ease-in-out" data-speed="15">
+                <!-- 照片1 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">第一次牵手，心跳加速的感觉</p>
+                  </div>
+                  <img src="img/photo1.jpg" alt="甜蜜瞬间" class="w-full h-64 object-cover">
+                </div>
+                <!-- 照片2 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">我们的第一个吻，永远难忘</p>
+                  </div>
+                  <img src="img/photo2.jpg" alt="甜蜜瞬间" class="w-full h-64 object-cover">
+                </div>
+                <!-- 照片3 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">在星空下许下的承诺</p>
+                  </div>
+                  <img src="img/photo3.jpg" alt="甜蜜瞬间" class="w-full h-64 object-cover">
+                </div>
+                <!-- 循环复制照片以实现无缝滚动 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">第一次牵手，心跳加速的感觉</p>
+                  </div>
+                  <img src="img/photo1.jpg" alt="甜蜜瞬间" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">我们的第一个吻，永远难忘</p>
+                  </div>
+                  <img src="img/photo2.jpg" alt="甜蜜瞬间" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">在星空下许下的承诺</p>
+                  </div>
+                  <img src="img/photo3.jpg" alt="甜蜜瞬间" class="w-full h-64 object-cover">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 旅行足迹 -->
+          <div id="tab2" class="gallery-tab-content hidden">
+            <div class="gallery-scroll-container overflow-hidden">
+              <div class="gallery-scroll-track flex gap-6 transition-transform duration-10000 ease-in-out" data-speed="20">
+                <!-- 照片1 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">海边的浪漫之旅</p>
+                  </div>
+                  <img src="img/photo4.jpg" alt="旅行足迹" class="w-full h-64 object-cover">
+                </div>
+                <!-- 照片2 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">山间的美好回忆</p>
+                  </div>
+                  <img src="img/photo5.jpg" alt="旅行足迹" class="w-full h-64 object-cover">
+                </div>
+                <!-- 照片3 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">城市的繁华与我们的宁静</p>
+                  </div>
+                  <img src="img/photo6.jpg" alt="旅行足迹" class="w-full h-64 object-cover">
+                </div>
+                <!-- 循环复制照片以实现无缝滚动 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">海边的浪漫之旅</p>
+                  </div>
+                  <img src="img/photo4.jpg" alt="旅行足迹" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">山间的美好回忆</p>
+                  </div>
+                  <img src="img/photo5.jpg" alt="旅行足迹" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">城市的繁华与我们的宁静</p>
+                  </div>
+                  <img src="img/photo6.jpg" alt="旅行足迹" class="w-full h-64 object-cover">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 日常点滴 -->
+          <div id="tab3" class="gallery-tab-content hidden">
+            <div class="gallery-scroll-container overflow-hidden">
+              <div class="gallery-scroll-track flex gap-6 transition-transform duration-10000 ease-in-out" data-speed="18">
+                <!-- 照片1 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">一起做的第一顿早餐</p>
+                  </div>
+                  <img src="img/photo7.jpg" alt="日常点滴" class="w-full h-64 object-cover">
+                </div>
+                <!-- 照片2 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">一起看的第一场雪</p>
+                  </div>
+                  <img src="img/photo8.jpg" alt="日常点滴" class="w-full h-64 object-cover">
+                </div>
+                <!-- 照片3 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">一起养的小宠物</p>
+                  </div>
+                  <img src="img/photo9.jpg" alt="日常点滴" class="w-full h-64 object-cover">
+                </div>
+                <!-- 循环复制照片以实现无缝滚动 -->
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">一起做的第一顿早餐</p>
+                  </div>
+                  <img src="img/photo7.jpg" alt="日常点滴" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">一起看的第一场雪</p>
+                  </div>
+                  <img src="img/photo8.jpg" alt="日常点滴" class="w-full h-64 object-cover">
+                </div>
+                <div class="photo-item relative flex-shrink-0 w-64 md:w-80 rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-xl cursor-pointer">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p class="text-red text-shadow">一起养的小宠物</p>
+                  </div>
+                  <img src="img/photo9.jpg" alt="日常点滴" class="w-full h-64 object-cover">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- 情书区域 - 信封样式 -->
+<section id="love-letter" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl font-romantic text-center text-love-primary mb-8">给我的爱人</h2>
+
+      <!-- 信封样式容器 -->
+      <div class="relative" style="width: 600px; height: 450px; margin: 0 auto;">
+      <!-- 信封背面 -->
+      <div id="envelope-back"
+        class="absolute inset-0 bg-love-primary rounded-t-2xl border-2 border-love-dark flex items-center justify-center cursor-pointer transition-all duration-500 transform hover:scale-105">
+        <div style="font-size: 20vw;">💌</div> <!-- 这里的 font-size 设置为 20vw -->
+      </div>
+
+      <!-- 信封正面 -->
+      <div id="envelope-front"
+        class="absolute inset-0 bg-white rounded-xl border-2 border-love-dark p-8 hidden transition-all duration-500"
+          style="background-image: url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22%3E%3Cpath d=%22M0 0 L100 100 M100 0 L0 100%22 stroke=%22rgba(255,105,180,0.1)%22 stroke-width=%221%22/%3E%3C/svg%3E'); background-size: 20px 20px;">
+          <div class="text-gray-700 space-y-3 font-serif leading-relaxed text-sm md:text-base h-full overflow-y-auto">
+            <p>亲爱的，</p>
+            <p>当我写下这些文字时，我的心中充满了对你的爱和感激。三年前的今天，我们相遇了，从那一刻起，我的生命变得更加精彩和有意义。</p>
+            <p>感谢你一直以来的陪伴、理解和支持。在这三年里，我们一起经历了欢笑和泪水，一起成长和进步。每一个与你相处的瞬间，都成为了我生命中最珍贵的回忆。</p>
+            <p>你的笑容是我每天醒来的动力，你的拥抱是我最温暖的港湾。无论未来会遇到什么困难和挑战，我都相信我们会一起面对，一起克服。</p>
+            <p>在这个特别的日子里，我想对你说：我爱你，不仅是今天，而是未来的每一天。我期待与你一起走过更多的三年，创造更多美好的回忆。</p>
+            <p class="text-right font-romantic text-love-primary">永远爱你的人</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- 倒计时区域 -->
+    <section id="countdown" class="py-20 bg-gradient-to-br from-love-primary/20 to-love-secondary/20">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl font-romantic text-center text-love-primary mb-10 animate-heartbeat">我们已经在一起 <span class="heartbeat-animation inline-block">❤</span></h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
+          <div class="bg-white p-4 rounded-xl shadow-lg">
+            <div id="days" class="text-4xl md:text-5xl font-bold text-love-primary">0</div>
+            <div class="text-gray-600">天</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow-lg">
+            <div id="hours" class="text-4xl md:text-5xl font-bold text-love-primary">0</div>
+            <div class="text-gray-600">时</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow-lg">
+            <div id="minutes" class="text-4xl md:text-5xl font-bold text-love-primary">0</div>
+            <div class="text-gray-600">分</div>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow-lg">
+            <div id="seconds" class="text-4xl md:text-5xl font-bold text-love-primary">0</div>
+            <div class="text-gray-600">秒</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 互动功能已移除 -->
+
+    <!-- 页脚区域 -->
+    <footer class="py-10 bg-love-dark text-red text-center">
+      <div class="container mx-auto px-4">
+        <!-- <p class="mb-4">我们的三周年 & 七夕纪念</p> -->
+        <div class="flex justify-center space-x-4 mb-6">
+          <button id="share-button" class="hover:text-love-primary transition-colors">
+            <!-- <i class="fa fa-share-alt text-xl"></i> -->
+          </button>
+          <button id="download-button" class="hover:text-love-primary transition-colors">
+            <!-- <i class="fa fa-download text-xl"></i> -->
+          </button>
+        </div>
+        <p class="text-gray-400 text-sm">用❤️制作，永远爱你</p>
+      </div>
+    </footer>
+  </main>
+
+
+  
+  <!-- 背景音乐将通过JavaScript动态创建 -->
+  
+  <!-- 图片查看器模态框 -->
+  <div id="image-viewer" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center">
+    <button id="close-viewer" class="absolute top-4 right-4 text-red text-4xl hover:text-gray-300 transition-colors">×</button>
+    <img id="viewed-image" class="max-w-full max-h-full object-contain" src="" alt="查看图片">
+  </div>
+
+  <!-- 脚本 -->
+  <script>
+    // 配置项
+    const CONFIG = {
+      // 默认纪念日，用于演示目的
+      DEFAULT_ANNIVERSARY: '2022-05-20',
+      //正确的纪念日
+      CORRECT_ANNIVERSARY: '2022-08-4',
+      // 爱心雨配置
+      HEART_RAIN: {
+        count: 50,
+        colors: ['#FF6B6B', '#FF8E8E', '#FFD166', '#06D6A0', '#118AB2', '#073B4C']
+      }
+    };
+
+    // DOM 元素
+    const ELEMENTS = {
+      passwordPage: document.getElementById('password-page'),
+      mainContent: document.getElementById('main-content'),
+      passwordForm: document.getElementById('password-form'),
+      anniversaryDate: document.getElementById('anniversary-date'),
+      errorMessage: document.getElementById('error-message'),
+      bgMusic: null, // 将在初始化时动态创建
+      playMusic: document.getElementById('play-music'),
+      heartsContainer: document.getElementById('hearts-container'),
+      likeButton: document.getElementById('like-button'),
+      likeCount: document.getElementById('like-count'),
+      messageForm: document.getElementById('message-form'),
+      messageInput: document.getElementById('message-input'),
+      messagesContainer: document.getElementById('messages-container'),
+      shareButton: document.getElementById('share-button'),
+      galleryTabs: document.querySelectorAll('.gallery-tab'),
+      galleryTabContents: document.querySelectorAll('.gallery-tab-content'),
+      countdown: {
+        days: document.getElementById('days'),
+        hours: document.getElementById('hours'),
+        minutes: document.getElementById('minutes'),
+        seconds: document.getElementById('seconds')
+      },
+      // 爱的信件相关元素
+      envelopeIcon: document.getElementById('envelope-icon'),
+      loveLetterShortcut: document.querySelector('.love-shortcut[data-target="love-letter"]'),
+      envelopeBack: document.getElementById('envelope-back'),
+      envelopeFront: document.getElementById('envelope-front')
+    };
+
+    // 状态管理
+    const STATE = {
+      isMusicPlaying: false,
+      likeCount: 0,
+      anniversaryDate: null,
+      messages: []
+    };
+
+    // 工具函数
+    const UTILS = {
+      // 初始化爱心雨
+      initHeartRain: () => {
+        for (let i = 0; i < CONFIG.HEART_RAIN.count; i++) {
+          const heart = document.createElement('div');
+          heart.className = 'heart absolute';
+          
+          // 随机大小
+          const size = Math.random() * 30 + 10;
+          
+          // 随机颜色
+          const color = CONFIG.HEART_RAIN.colors[Math.floor(Math.random() * CONFIG.HEART_RAIN.colors.length)];
+          
+          // 随机动画持续时间
+          const duration = Math.random() * 10 + 5;
+          
+          // 随机延迟
+          const delay = Math.random() * 10;
+          
+          // 随机水平位置
+          const left = Math.random() * 100;
+          
+          heart.style.cssText = `
+            left: ${left}%;
+            top: -20px;
+            font-size: ${size}px;
+            color: ${color};
+            opacity: ${Math.random() * 0.7 + 0.3};
+            animation: fall ${duration}s linear ${delay}s infinite;
+            pointer-events: none;
+          `;
+          
+          heart.innerHTML = '❤️';
+          ELEMENTS.heartsContainer.appendChild(heart);
+        }
+        
+        // 添加下落动画样式
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes fall {
+            from {
+              transform: translateY(-20px) rotate(0deg) scale(0);
+              opacity: ${Math.random() * 0.7 + 0.3};
+            }
+            to {
+              transform: translateY(${window.innerHeight + 100}px) rotate(720deg) scale(1);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      },
+      
+      // 验证纪念日
+      validateAnniversary: (date) => {
+        console.log('Validating date:', date);
+        // 设置正确的纪念日日期（可以根据实际情况修改）
+        const correctDate = CONFIG.CORRECT_ANNIVERSARY;
+        
+        // 验证日期格式
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!dateRegex.test(date)) {
+          console.log('Date format invalid');
+          return false;
+        }
+        
+        // 验证日期的有效性
+        const inputDate = new Date(date);
+        const correctDateObj = new Date(correctDate);
+        
+        // 检查是否为有效日期，并且年月日完全匹配
+        const result = !isNaN(inputDate.getTime()) && 
+                      inputDate.getFullYear() === correctDateObj.getFullYear() &&
+                      inputDate.getMonth() === correctDateObj.getMonth() &&
+                      inputDate.getDate() === correctDateObj.getDate();
+        
+        console.log('Validation result:', result);
+        return result;
+      },
+      
+      // 显示可爱风格的错误提示框
+      showCuteError: () => {
+        // 检查是否已存在错误提示框，如果有则移除
+        const existingError = document.getElementById('cute-error');
+        if (existingError) {
+          existingError.remove();
+        }
+        
+        // 创建错误提示框
+        const errorBox = document.createElement('div');
+        errorBox.id = 'cute-error';
+        errorBox.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-love-primary text-red p-6 rounded-2xl shadow-xl z-50 flex items-center gap-4 animate-bounce';
+        errorBox.style.fontFamily = '"Dancing Script", cursive';
+        errorBox.innerHTML = `
+          <div class="text-4xl">😘</div>
+          <div class="text-2xl font-bold">臭猪猪，这都忘记了</div>
+        `;
+        
+        // 添加关闭按钮
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'absolute top-2 right-2 text-red/80 hover:text-red text-xl';
+        closeBtn.innerHTML = '&times;';
+        closeBtn.addEventListener('click', () => {
+          errorBox.style.opacity = '0';
+          setTimeout(() => {
+            errorBox.remove();
+          }, 300);
+        });
+        errorBox.appendChild(closeBtn);
+        
+        // 添加到文档
+        document.body.appendChild(errorBox);
+        
+        // 添加一些可爱的随机移动效果
+        let position = 0;
+        const moveInterval = setInterval(() => {
+          position = (position + 1) % 360;
+          const radians = position * Math.PI / 180;
+          const offsetX = Math.cos(radians) * 10;
+          const offsetY = Math.sin(radians) * 10;
+          errorBox.style.transform = `translate(-50%, -50%) translateX(${offsetX}px) translateY(${offsetY}px)`;
+        }, 100);
+        
+        // 3秒后自动关闭
+        setTimeout(() => {
+          clearInterval(moveInterval);
+          errorBox.style.opacity = '0';
+          setTimeout(() => {
+            errorBox.remove();
+          }, 300);
+        }, 3000);
+      },
+      
+      // 拆封情书动画
+      openEnvelope: () => {
+        // 隐藏信封背面
+        if (ELEMENTS.envelopeBack) {
+          ELEMENTS.envelopeBack.classList.add('scale-0', 'opacity-0');
+          
+          // 显示信封正面，并添加出现动画
+          setTimeout(() => {
+            if (ELEMENTS.envelopeFront) {
+              ELEMENTS.envelopeFront.classList.remove('hidden');
+              ELEMENTS.envelopeFront.classList.add('scale-110', 'opacity-0');
+              
+              setTimeout(() => {
+                ELEMENTS.envelopeFront.classList.remove('scale-110', 'opacity-0');
+                ELEMENTS.envelopeFront.classList.add('scale-100', 'opacity-100');
+                
+                // 播放爱心雨动画
+                UTILS.createEnvelopeHeartAnimation();
+              }, 100);
+            }
+          }, 300);
+        }
+      },
+      
+      // 创建信封爱心弹出动画
+      createEnvelopeHeartAnimation: () => {
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement('div');
+          heart.className = 'absolute';
+          heart.innerHTML = '❤️';
+          
+          const size = Math.random() * 20 + 10;
+          const duration = Math.random() * 2 + 1;
+          const left = 50 + (Math.random() - 0.5) * 100;
+          const top = 50 + (Math.random() - 0.5) * 100;
+          const rotation = Math.random() * 360;
+          const opacity = Math.random() * 0.7 + 0.3;
+          
+          heart.style.cssText = `
+            left: ${left}%;
+            top: ${top}%;
+            font-size: ${size}px;
+            opacity: ${opacity};
+            transform: translate(-50%, -50%) scale(0) rotate(${rotation}deg);
+            animation: pop-heart ${duration}s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+          `;
+          
+          document.body.appendChild(heart);
+          
+          // 动画结束后移除元素
+          setTimeout(() => {
+            heart.remove();
+          }, duration * 1000);
+        }
+        
+        // 添加弹出动画样式
+        if (!document.getElementById('envelope-animation-style')) {
+          const style = document.createElement('style');
+          style.id = 'envelope-animation-style';
+          style.textContent = `
+            @keyframes pop-heart {
+              0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+              }
+              50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+                opacity: 1;
+              }
+              100% {
+                transform: translate(-50%, -50%) scale(0) rotate(360deg);
+                opacity: 0;
+              }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+      },
+      
+      // 初始化粒子效果
+      initParticles: () => {
+        const container = document.getElementById('particle-container');
+        const particleCount = 50;
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          const size = Math.random() * 20 + 10;
+          const color = CONFIG.HEART_RAIN.colors[Math.floor(Math.random() * CONFIG.HEART_RAIN.colors.length)];
+          const duration = Math.random() * 8 + 4;
+          const delay = Math.random() * 5;
+          const left = Math.random() * 100;
+          const top = Math.random() * 100;
+          
+          particle.className = 'absolute';
+          particle.innerHTML = '❤️';
+          particle.style.cssText = `
+            left: ${left}%;
+            top: ${top}%;
+            font-size: ${size}px;
+            color: ${color};
+            opacity: ${Math.random() * 0.7 + 0.3};
+            transform: scale(0);
+            animation: float ${duration}s ease-in-out ${delay}s infinite alternate;
+            pointer-events: none;
+          `;
+          
+          container.appendChild(particle);
+        }
+      },
+      
+      // 启动相册滚动动画
+      startGalleryScroll: () => {
+        const tracks = document.querySelectorAll('.gallery-scroll-track');
+        tracks.forEach(track => {
+          const speed = track.dataset.speed || 20;
+          let position = 0;
+          
+          track.scrollInterval = setInterval(() => {
+            position--;
+            track.style.transform = `translateX(${position}px)`;
+            
+            // 检测是否需要重置位置以实现无缝滚动
+            const firstHalfWidth = track.scrollWidth / 2;
+            if (Math.abs(position) >= firstHalfWidth) {
+              position = 0;
+              track.style.transform = `translateX(${position}px)`;
+            }
+          }, speed);
+        });
+      },
+      
+      // 停止相册滚动动画
+      stopGalleryScroll: () => {
+        const tracks = document.querySelectorAll('.gallery-scroll-track');
+        tracks.forEach(track => {
+          if (track.scrollInterval) {
+            clearInterval(track.scrollInterval);
+            track.scrollInterval = null;
+          }
+        });
+      },
+      
+      // 计算在一起的时间
+      calculateTogetherTime: () => {
+        if (!STATE.anniversaryDate) return;
+        
+        const now = new Date();
+        const anniversary = new Date(STATE.anniversaryDate);
+        const diffTime = Math.abs(now - anniversary);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+        const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+        
+        ELEMENTS.countdown.days.textContent = diffDays;
+        ELEMENTS.countdown.hours.textContent = diffHours;
+        ELEMENTS.countdown.minutes.textContent = diffMinutes;
+        ELEMENTS.countdown.seconds.textContent = diffSeconds;
+      },
+      
+      // 切换相册标签
+      switchGalleryTab: (tabId) => {
+        ELEMENTS.galleryTabs.forEach(tab => {
+          // 去掉强制字体，保持全局默认字体
+          // tab.style.fontFamily = '"Dancing Script", cursive';
+
+          if (tab.dataset.tab === tabId) {
+            // 激活状态：深粉色背景 + 白字
+            tab.classList.add('active', 'bg-love-primary', 'text-black');
+            tab.classList.remove(
+              'bg-pink-100', 'text-love-primary',
+              'bg-gray-200', 'text-gray-700'
+            );
+          } else {
+            // 非激活状态：浅粉色背景 + 深粉色字体
+            tab.classList.remove('active', 'bg-love-primary', 'text-white');
+            tab.classList.add('bg-pink-100', 'text-love-primary');
+          }
+        });
+
+        ELEMENTS.galleryTabContents.forEach(content => {
+          if (content.id === tabId) {
+            content.classList.add('active');
+            content.classList.remove('hidden');
+          } else {
+            content.classList.remove('active');
+            content.classList.add('hidden');
+          }
+        });
+      },
+
+      
+      // 添加留言
+      addMessage: (message) => {
+        if (!message.trim()) return;
+        
+        const messageElement = document.createElement('div');
+        messageElement.className = 'bg-love-light p-4 rounded-lg shadow-sm';
+        messageElement.innerHTML = `
+          <p class="text-gray-700">${message}</p>
+          <p class="text-gray-400 text-sm mt-2">${new Date().toLocaleString()}</p>
+        `;
+        
+        ELEMENTS.messagesContainer.appendChild(messageElement);
+        ELEMENTS.messagesContainer.scrollTop = ELEMENTS.messagesContainer.scrollHeight;
+        
+        // 保存到本地存储
+        STATE.messages.push({ text: message, date: new Date().toISOString() });
+        localStorage.setItem('loveMessages', JSON.stringify(STATE.messages));
+      },
+      
+      // 加载本地存储的留言
+      loadMessages: () => {
+        const messages = localStorage.getItem('loveMessages');
+        if (messages) {
+          STATE.messages = JSON.parse(messages);
+          STATE.messages.forEach(msg => {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'bg-love-light p-4 rounded-lg shadow-sm';
+            messageElement.innerHTML = `
+              <p class="text-gray-700">${msg.text}</p>
+              <p class="text-gray-400 text-sm mt-2">${new Date(msg.date).toLocaleString()}</p>
+            `;
+            ELEMENTS.messagesContainer.appendChild(messageElement);
+          });
+        }
+      },
+      
+      // 加载点赞数
+      loadLikeCount: () => {
+        const likeCount = localStorage.getItem('loveLikeCount');
+        if (likeCount) {
+          STATE.likeCount = parseInt(likeCount);
+          ELEMENTS.likeCount.textContent = `${STATE.likeCount} 个爱心`;
+          
+          if (STATE.likeCount > 0) {
+            ELEMENTS.likeButton.innerHTML = '<i class="fa fa-heart"></i>';
+            ELEMENTS.likeButton.classList.remove('text-gray-300');
+            ELEMENTS.likeButton.classList.add('text-love-primary');
+          }
+        }
+      },
+      
+      // 分享功能
+      sharePage: () => {
+        if (navigator.share) {
+          navigator.share({
+            title: '我们的三周年 & 七夕纪念',
+            text: '来看看我们的爱情回忆吧！',
+            url: window.location.href
+          }).catch(err => console.error('分享失败:', err));
+        } else {
+          // 复制链接到剪贴板
+          navigator.clipboard.writeText(window.location.href)
+            .then(() => alert('链接已复制到剪贴板！'))
+            .catch(err => console.error('复制失败:', err));
+        }
+      },
+      
+      // 创建信封点击爱心动画
+      createEnvelopeHeartAnimation: () => {
+        const container = document.getElementById('password-page');
+        for (let i = 0; i < 30; i++) {
+          const heart = document.createElement('div');
+          heart.className = 'absolute text-4xl';
+          heart.innerHTML = '❤️';
+          heart.style.cssText = `
+            left: 50%;
+            top: 50%;
+            opacity: 0;
+            transform: scale(0);
+            animation: enter-heart ${1 + Math.random() * 1.5}s ease-out;
+          `;
+          container.appendChild(heart);
+        }
+      }
+    };
+
+    // 事件监听器
+    const EVENTS = {
+      // 初始化事件监听
+      init: () => {
+        // 初始化时直接显示日期表单
+        setTimeout(() => {
+          document.getElementById('date-form-container').classList.remove('hidden');
+          document.getElementById('date-form-container').classList.add('scale-100', 'opacity-100');
+        }, 500);
+        
+        // 信封点击拆封事件
+        if (ELEMENTS.envelopeBack) {
+          ELEMENTS.envelopeBack.addEventListener('click', () => {
+            // 创建爱心弹出动画
+            createHeartPopAnimation();
+            // 延迟打开信封，让动画效果先显示
+            setTimeout(() => {
+              UTILS.openEnvelope();
+            }, 500);
+          });
+        }
+        
+        // 创建爱心弹出动画函数
+        function createHeartPopAnimation() {
+          const envelopeContainer = document.getElementById('love-letter');
+          if (!envelopeContainer) return;
+          
+          // 创建10个爱心
+          for (let i = 0; i < 10; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'absolute z-30 text-2xl';
+            heart.innerHTML = '❤️';
+            
+            // 设置随机位置和动画延迟
+            const randomX = Math.random() * 200 - 100; // -100 到 100 的范围
+            const randomY = Math.random() * 100 - 50; // -50 到 50 的范围
+            const delay = Math.random() * 0.5;
+            
+            heart.style.cssText = `
+              left: 50%;
+              top: 50%;
+              transform: translate(${randomX}px, ${randomY}px) scale(0);
+              animation: heart-pop 1s ease-out ${delay}s forwards;
+            `;
+            
+            envelopeContainer.appendChild(heart);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+              heart.remove();
+            }, 1500);
+          }
+        }
+        
+        // 密码表单提交
+      ELEMENTS.passwordForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const date = ELEMENTS.anniversaryDate.value;
+        
+        // 确保用户必须输入日期
+        if (!date) {
+          console.log('Date is empty, showing cute error');
+          UTILS.showCuteError();
+          document.getElementById('anniversary-date').classList.add('border-red-500', 'animate-shake');
+          setTimeout(() => {
+            document.getElementById('anniversary-date').classList.remove('border-red-500', 'animate-shake');
+          }, 1000);
+          return;
+        }
+        
+        const isValid = UTILS.validateAnniversary(date);
+        console.log('Date validation result:', isValid, 'for date:', date);
+        
+        if (isValid) {
+          STATE.anniversaryDate = date;
+          localStorage.setItem('anniversaryDate', date);
+          
+          // 添加进入动画
+          document.getElementById('date-form-container').classList.add('scale-0', 'opacity-0');
+          
+          // 创建进入动画效果
+          UTILS.createEnvelopeHeartAnimation();
+          
+          setTimeout(() => {
+            ELEMENTS.passwordPage.classList.add('hidden');
+            ELEMENTS.mainContent.classList.remove('hidden');
+            // 初始化倒计时
+            UTILS.calculateTogetherTime();
+            setInterval(UTILS.calculateTogetherTime, 1000);
+            // 启动相册滚动
+            UTILS.startGalleryScroll();
+          }, 1000);
+        } else {
+          // 日期验证失败，显示可爱风格的错误提示框
+          console.log('Date validation failed, showing cute error');
+          UTILS.showCuteError();
+          
+          // 添加抖动动画
+          document.getElementById('anniversary-date').classList.add('border-red-500', 'animate-shake');
+          
+          setTimeout(() => {
+            document.getElementById('anniversary-date').classList.remove('border-red-500', 'animate-shake');
+          }, 1000);
+        }
+      });
+        
+        // 信封图标点击事件 - 新增
+        const envelopeIcon = document.getElementById('envelope-icon');
+        if (envelopeIcon) {
+          envelopeIcon.addEventListener('click', () => {
+            // 创建爱心弹出动画
+            UTILS.createEnvelopeHeartAnimation();
+            
+            // 隐藏日期表单
+            const dateFormContainer = document.getElementById('date-form-container');
+            if (dateFormContainer) {
+              dateFormContainer.classList.add('scale-0', 'opacity-0');
+            }
+            
+            setTimeout(() => {
+              // 设置默认日期
+              STATE.anniversaryDate = CONFIG.DEFAULT_ANNIVERSARY;
+              localStorage.setItem('anniversaryDate', STATE.anniversaryDate);
+              
+              // 跳转到主内容
+              ELEMENTS.passwordPage.classList.add('hidden');
+              ELEMENTS.mainContent.classList.remove('hidden');
+              
+              // 初始化倒计时
+              UTILS.calculateTogetherTime();
+              setInterval(UTILS.calculateTogetherTime, 1000);
+              
+              // 启动相册滚动
+              UTILS.startGalleryScroll();
+            }, 1000);
+          });
+        }
+        
+        // 使用本地音频文件作为背景音乐
+        let bgAudio = null;
+        
+        // 初始化背景音乐
+        function initBackgroundMusic() {
+            if (!bgAudio) {
+                try {
+                    bgAudio = new Audio('/love_song.mp3');
+                    bgAudio.loop = true; // 设置循环播放
+                    bgAudio.volume = 0.3; // 设置音量
+                } catch (e) {
+                    console.error('初始化背景音乐失败:', e);
+                    throw e;
+                }
+            }
+        }
+        
+        // 播放音乐
+        function playMusic() {
+            try {
+                initBackgroundMusic();
+                
+                // 检查浏览器是否允许自动播放
+                bgAudio.play().then(() => {
+                    STATE.isMusicPlaying = true;
+                    // 更新UI状态
+                    ELEMENTS.playMusic.innerHTML = '<i class="fa fa-pause"></i><span>暂停音乐</span>';
+                }).catch(error => {
+                    console.error('播放音乐失败（可能是浏览器自动播放限制）:', error);
+                    alert('抱歉，无法自动播放背景音乐。\n请点击播放按钮手动播放。');
+                    STATE.isMusicPlaying = false;
+                });
+            } catch (e) {
+                console.error('播放音乐出错:', e);
+                alert('抱歉，无法播放背景音乐。\n\n错误信息：' + e.message);
+                ELEMENTS.playMusic.innerHTML = '<i class="fa fa-music"></i><span>播放音乐</span>';
+                STATE.isMusicPlaying = false;
+            }
+        }
+        
+        // 暂停音乐
+        function pauseMusic() {
+            if (bgAudio) {
+                bgAudio.pause();
+                STATE.isMusicPlaying = false;
+                ELEMENTS.playMusic.innerHTML = '<i class="fa fa-music"></i><span>播放音乐</span>';
+            }
+        }
+        
+        // 停止音乐
+        function stopMusic() {
+            if (bgAudio) {
+                bgAudio.pause();
+                bgAudio.currentTime = 0;
+                STATE.isMusicPlaying = false;
+            }
+        }
+        
+        // 播放/暂停音乐按钮事件
+        ELEMENTS.playMusic.addEventListener('click', async () => {
+            if (STATE.isMusicPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        });
+        
+        // 相册标签切换
+        ELEMENTS.galleryTabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            UTILS.switchGalleryTab(tab.dataset.tab);
+            // 重新启动滚动动画
+            setTimeout(() => {
+              UTILS.stopGalleryScroll();
+              UTILS.startGalleryScroll();
+            }, 100);
+          });
+        });
+        
+        // 相册悬停暂停效果 - 简化实现
+        document.querySelectorAll('.gallery-scroll-container').forEach(container => {
+          container.addEventListener('mouseenter', () => {
+            const track = container.querySelector('.gallery-scroll-track');
+            if (track && track.scrollInterval) {
+              clearInterval(track.scrollInterval);
+              track.scrollInterval = null;
+            }
+          });
+          
+          container.addEventListener('mouseleave', () => {
+            const track = container.querySelector('.gallery-scroll-track');
+            if (track && !track.scrollInterval) {
+              // 获取原始速度
+              const speed = track.dataset.speed || 20;
+              let position = 0;
+              
+              // 重新设置滚动
+              track.scrollInterval = setInterval(() => {
+                position--;
+                track.style.transform = `translateX(${position}px)`;
+                
+                // 检测是否需要重置位置以实现无缝滚动
+                const firstHalfWidth = track.scrollWidth / 2;
+                if (Math.abs(position) >= firstHalfWidth) {
+                  position = 0;
+                  track.style.transform = `translateX(${position}px)`;
+                }
+              }, speed);
+            }
+          });
+        });
+        
+        // 照片点击放大效果
+        document.querySelectorAll('.photo-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const viewer = document.getElementById('image-viewer');
+            const viewedImg = document.getElementById('viewed-image');
+            
+            viewedImg.src = img.src;
+            viewedImg.alt = img.alt;
+            viewer.classList.remove('hidden');
+            viewer.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+        
+        // 关闭图片查看器
+        document.getElementById('close-viewer').addEventListener('click', () => {
+          const viewer = document.getElementById('image-viewer');
+          viewer.classList.add('hidden');
+          viewer.classList.remove('flex');
+          document.body.style.overflow = '';
+        });
+        
+        // 点击图片查看器背景关闭
+        document.getElementById('image-viewer').addEventListener('click', (e) => {
+          if (e.target === document.getElementById('image-viewer')) {
+            const viewer = document.getElementById('image-viewer');
+            viewer.classList.add('hidden');
+            viewer.classList.remove('flex');
+            document.body.style.overflow = '';
+          }
+        });
+        
+        // 爱心点赞
+        ELEMENTS.likeButton?.addEventListener('click', () => {
+          if (ELEMENTS.likeButton.classList.contains('text-gray-300')) {
+            STATE.likeCount++;
+            ELEMENTS.likeButton.innerHTML = '<i class="fa fa-heart"></i>';
+            ELEMENTS.likeButton.classList.remove('text-gray-300');
+            ELEMENTS.likeButton.classList.add('text-love-primary');
+            ELEMENTS.likeCount.textContent = `${STATE.likeCount} 个爱心`;
+            localStorage.setItem('loveLikeCount', STATE.likeCount);
+          }
+        });
+        
+        // 留言表单提交
+        ELEMENTS.messageForm?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          UTILS.addMessage(ELEMENTS.messageInput.value);
+          ELEMENTS.messageInput.value = '';
+        });
+        
+        // 分享按钮
+        ELEMENTS.shareButton.addEventListener('click', UTILS.sharePage);
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              window.scrollTo({ 
+                top: target.offsetTop, 
+                behavior: 'smooth'
+              });
+            }
+          });
+        });
+
+        // 全局点击一次性触发音乐播放
+        document.addEventListener('click', () => {
+          if (!STATE.isMusicPlaying) {
+            playMusic();
+          }
+        }, { once: true });
+
+        // 土味情话数组
+        const LOVE_PHRASES = [
+          '你是我生命中最美的风景',
+          '想你的时候，嘴角不自觉地上扬',
+          '在我心里，你比任何风景都美丽',
+          '余生请多指教',
+          '你是我每天醒来的动力',
+          '我爱你，从过去到未来',
+          '遇到你，是我最大的幸运',
+          '我想和你一起慢慢变老',
+          '你的笑容是我最大的幸福',
+          '世界很大，但我眼里只有你'
+        ];
+        
+        // 随机颜色数组 - 排除白色和绿色
+        const RANDOM_COLORS = [
+          '#FF6B6B', '#FF8E53', '#4ECDC4', '#45B7D1', '#96CEB4',
+          '#FECA57', '#FF9FF3', '#54A0FF', '#5F27CD', '#FF6348',
+          '#C0392B', '#8E44AD', '#3498DB', '#E74C3C', '#9B59B6'
+        ];
+        
+        // 点击爱的信件图标或快捷方式播放音乐
+        const loveLetterShortcut = document.querySelector('.love-shortcut[data-target="love-letter"]');
+        const loveLetterSection = document.getElementById('love-letter');
+        
+        if (loveLetterShortcut) {
+          loveLetterShortcut.addEventListener('click', () => {
+            if (!STATE.isMusicPlaying) {
+              playMusic();
+            }
+          });
+        }
+        
+        if (loveLetterSection) {
+          loveLetterSection.addEventListener('click', () => {
+            if (!STATE.isMusicPlaying) {
+              playMusic();
+            }
+          });
+        }
+        
+        // 点击空白区域生成土味情话
+        document.addEventListener('click', (e) => {
+          // 检查是否点击的是空白区域（不是任何有特定功能的元素）
+          const isClickableElement = e.target.closest('button, a, input, form, .photo-item, .gallery-tab, #love-letter, .love-shortcut, #image-viewer, #date-form-container, #play-music');
+          
+          if (!isClickableElement && e.target !== document.body) {
+            // 生成随机土味情话
+            const randomPhrase = LOVE_PHRASES[Math.floor(Math.random() * LOVE_PHRASES.length)];
+            
+            // 创建情话元素
+            const phraseElement = document.createElement('div');
+            
+            // 随机选择颜色（排除白色和绿色）
+            const randomColor = RANDOM_COLORS[Math.floor(Math.random() * RANDOM_COLORS.length)];
+            
+            // 设置元素样式
+            phraseElement.className = 'love-phrase absolute z-40 transform transition-all duration-300';
+            phraseElement.style.color = randomColor;
+            phraseElement.style.fontFamily = '"Comic Sans MS", "Marker Felt", cursive';
+            phraseElement.style.fontSize = '16px';
+            phraseElement.style.fontWeight = 'bold';
+            phraseElement.style.whiteSpace = 'nowrap';
+            phraseElement.textContent = randomPhrase;
+            
+            // 设置位置 - 与鼠标点击坐标保持一致
+            phraseElement.style.left = `${e.clientX}px`;
+            phraseElement.style.top = `${e.clientY}px`;
+            
+            // 添加到文档
+            document.body.appendChild(phraseElement);
+            
+            // 添加动画
+            setTimeout(() => {
+              phraseElement.style.opacity = '0';
+              phraseElement.style.transform = 'translateY(-20px) scale(0.8)';
+              
+              // 移除元素
+              setTimeout(() => {
+                if (document.body.contains(phraseElement)) {
+                  document.body.removeChild(phraseElement);
+                }
+              }, 300);
+            }, 3000);
+          }
+        });
+      }
+    };
+
+    // 动态创建背景音乐元素
+    function createBackgroundMusic() {
+      try {
+        // 创建音频元素
+        // 注意：背景音乐现在通过Web Audio API实现，不再使用audio元素
+        // 此函数保留以保持向后兼容性
+        console.log('背景音乐通过Web Audio API实现，不再创建audio元素');
+        return null;
+      } catch (error) {
+        console.error('创建背景音乐元素失败:', error);
+        return null;
+      }
+    }
+    
+    // 初始化函数
+    const init = () => {
+      // 动态创建背景音乐元素
+      ELEMENTS.bgMusic = createBackgroundMusic();
+      
+      // 设置默认日期
+      ELEMENTS.anniversaryDate.value = CONFIG.DEFAULT_ANNIVERSARY;
+      
+      // 检查是否已有保存的纪念日
+      const savedDate = localStorage.getItem('anniversaryDate');
+      if (savedDate) {
+        ELEMENTS.anniversaryDate.value = savedDate;
+      }
+      
+      // 初始化爱心雨
+      UTILS.initHeartRain();
+      
+      // 初始化粒子效果
+      UTILS.initParticles();
+      
+      // 初始化事件监听
+      EVENTS.init();
+      
+      // 为所有相册标签设置统一的字体样式
+      ELEMENTS.galleryTabs.forEach(tab => {
+        //tab.style.fontFamily = '"Dancing Script", cursive';
+      });
+      
+      // 加载保存的数据
+      UTILS.loadMessages();
+      UTILS.loadLikeCount();
+      
+      // 尝试自动播放背景音乐
+      setTimeout(() => {
+        if (!STATE.isMusicPlaying) {
+          playMusic();
+        }
+      }, 1000);
+      
+      // 添加进入动画和全局光标样式
+        const style = document.createElement('style');
+        style.textContent = `
+          /* 确保整个页面不会出现文本光标 */
+          * {
+            cursor: default !important;
+          }
+          
+          /* 为可交互元素设置适当的光标 */
+          button, a, input, select, textarea {
+            cursor: pointer !important;
+          }
+          
+          /* 文本输入框保持文本光标 */
+          input[type="text"], input[type="date"], textarea {
+            cursor: text !important;
+          }
+        @keyframes enter-heart {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.5);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(0);
+            opacity: 0;
+            transform: translateY(-100vh);
+          }
+        }
+        
+        /* 鲜花装饰动画 */
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        
+        @keyframes float-delay {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-12px) rotate(-5deg); }
+        }
+        
+        @keyframes float-long {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-18px) rotate(7deg); }
+        }
+        
+        @keyframes float-short {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(-3deg); }
+        }
+        
+        @keyframes float-delay-short {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-float-delay {
+          animation: float-delay 3s ease-in-out 0.5s infinite;
+        }
+        
+        .animate-float-long {
+          animation: float-long 4s ease-in-out infinite;
+        }
+        
+        .animate-float-short {
+          animation: float-short 2.5s ease-in-out 0.3s infinite;
+        }
+        
+        .animate-float-delay-short {
+          animation: float-delay-short 2s ease-in-out 0.7s infinite;
+        }
+        
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        @keyframes heartbeat {
+          0% {
+            transform: scale(1);
+          }
+          14% {
+            transform: scale(1.3);
+          }
+          28% {
+            transform: scale(1);
+          }
+          42% {
+            transform: scale(1.3);
+          }
+          70% {
+            transform: scale(1);
+          }
+        }
+        
+        .animate-shake {
+          animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        .animate-heartbeat {
+          animation: heartbeat 1s ease-in-out infinite;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // 显示日期表单
+      setTimeout(() => {
+        document.getElementById('date-form-container').classList.remove('hidden');
+        document.getElementById('date-form-container').classList.add('scale-100', 'opacity-100');
+      }, 500);
+    };
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
