@@ -11,7 +11,10 @@ module.exports = {
           secondary: '#F8A5C2', // 温暖的浅粉色
           accent: '#FDCB6E',    // 柔和的珊瑚色
           dark: '#2D3436',      // 深灰色
-          light: '#FFF8F8'      // 温暖的浅粉色背景
+          light: '#FFF8F8',     // 温暖的浅粉色背景
+          timeline: '#FFF2F4',  // 时间线区域背景（比light稍深一点的粉色）
+          letter: '#FFF5F6',    // 情书区域背景（介于light和timeline之间的粉色）
+          feature: '#FFECEF'    // 特色区域统一背景色（温馨柔和的粉色，比timeline稍深）
         },
       },
       fontFamily: {

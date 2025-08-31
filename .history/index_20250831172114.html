@@ -177,14 +177,13 @@
             <!-- 时间点1 -->
             <div class="relative flex flex-col md:flex-row items-center">
               <div class="md:w-1/2 md:pr-10 md:text-right mb-4 md:mb-0">
-                <h3 class="text-2xl font-romantic text-love-primary mb-1">初次相遇 👋</h3>
+                <h3 class="text-2xl font-romantic text-love-primary mb-1">初次相遇</h3>
                 <p class="text-gray-600 text-base">那一天，我的世界因你而变得不同。你的笑容如同阳光般温暖，让我无法忘怀。</p>
               </div>
               <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-love-primary border-3 border-white z-10"></div>
               <div class="md:w-1/2 md:pl-10">
                 <!-- 小型照片 - 带相框边框 -->
                 <div class="ml-4 cursor-pointer transition-all duration-300 hover:scale-105" onclick="openTimelinePhoto('img/couple1.jpg')">
-                  <div class="bg-love-primary p-1.5  border-love-primary">
                     <img src="img/couple1.jpg" alt="初次相遇" class="w-20 h-20 object-cover rounded">
                   </div>
                 </div>
@@ -195,15 +194,14 @@
             <div class="relative flex flex-col md:flex-row items-center">
               <div class="md:w-1/2 md:pr-10">
                 <!-- 小型照片 - 带相框边框 -->
-                <div class="mr-4 cursor-pointer transition-all duration-300 hover:scale-105" onclick="openTimelinePhoto('img/couple2.jpg')">
-                  <div class="bg-love-primary p-1.5  border-love-primary flex justify-end">
+                <div class="mr-2 cursor-pointer transition-all duration-300 hover:scale-105" onclick="openTimelinePhoto('img/couple2.jpg')">
                     <img src="img/couple2.jpg" alt="第一次约会" class="w-20 h-20 object-cover rounded">
                   </div>
                 </div>
               </div>
               <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-love-primary border-3 border-white z-10"></div>
-              <div class="md:w-1/2 md:pl-10 mt-4 md:mt-0">
-                <h3 class="text-2xl font-romantic text-love-primary mb-1">第一次约会 💑</h3>
+              <div class="md:w-1/2 md:pl-10 mt-1 md:mt-0">
+                <h3 class="text-2xl font-romantic text-love-primary mb-1">第一次约会</h3>
                 <p class="text-gray-600 text-base">我们一起去水上乐园，一起溜冰摇桥。那是我度过的最美好的夜晚之一。</p>
               </div>
             </div>
@@ -211,14 +209,13 @@
             <!-- 时间点3 -->
             <div class="relative flex flex-col md:flex-row items-center">
               <div class="md:w-1/2 md:pr-10 md:text-right mb-4 md:mb-0">
-                <h3 class="text-2xl font-romantic text-love-primary mb-1">确定关系 💍</h3>
+                <h3 class="text-2xl font-romantic text-love-primary mb-1">确定关系</h3>
                 <p class="text-gray-600 text-base">那一晚，我鼓起勇气主动向你表白。那一刻，我感到无比幸福。</p>
               </div>
               <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-love-primary border-3 border-white z-10"></div>
               <div class="md:w-1/2 md:pl-10">
                 <!-- 小型照片 - 带相框边框 -->
                 <div class="ml-4 cursor-pointer transition-all duration-300 hover:scale-105" onclick="openTimelinePhoto('img/couple3.jpg')">
-                  <div class="bg-love-primary p-1.5  border-love-primary">
                     <img src="img/couple3.jpg" alt="确定关系" class="w-20 h-20 object-cover rounded">
                   </div>
                 </div>
@@ -229,18 +226,16 @@
             <div class="relative flex flex-col md:flex-row items-center">
               <div class="md:w-1/2 md:pr-10">
                 <!-- 小型照片 - 带相框边框 -->
-                <div class="mr-4 cursor-pointer transition-all duration-300 hover:scale-105" onclick="openTimelinePhoto('img/couple4.jpg')">
-                  <div class="bg-love-primary p-1.5  border-love-primary flex justify-end">
+                <div class="mr-2 cursor-pointer transition-all duration-300 hover:scale-105" onclick="openTimelinePhoto('img/couple4.jpg')">
                     <img src="img/couple4.jpg" alt="朋友圈官宣" class="w-20 h-20 object-cover rounded">
                   </div>
                 </div>
               </div>
               <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-love-primary border-3 border-white z-10"></div>
-              <div class="md:w-1/2 md:pl-10 mt-4 md:mt-0">
-                <h3 class="text-2xl font-romantic text-love-primary mb-1">朋友圈官宣 🎉</h3>
+              <div class="md:w-1/2 md:pl-10 mt-1 md:mt-0">
+                <h3 class="text-2xl font-romantic text-love-primary mb-1">朋友圈官宣</h3>
                 <p class="text-gray-600 text-base">那一天，我们在朋友圈正式官宣，收到了很多点赞和祝福。</p>
               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -248,26 +243,14 @@
 
     <!-- 照片查看模态框 -->
     <div id="timelinePhotoModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
-      <div class="relative rounded-lg max-w-2xl max-h-[80vh] overflow-hidden shadow-2xl">
+      <div class="relative bg-white p-4 rounded-lg max-w-2xl max-h-[80vh] overflow-hidden shadow-2xl">
         <button onclick="closeTimelinePhoto()" class="absolute top-2 right-2 text-black bg-white/80 rounded-full p-1 hover:bg-white transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <!-- 上一张导航按钮 -->
-        <button id="prevPhoto" onclick="navigatePhotos(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 text-black bg-white/80 rounded-full p-2 hover:bg-white transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <!-- 下一张导航按钮 -->
-        <button id="nextPhoto" onclick="navigatePhotos(1)" class="absolute right-2 top-1/2 -translate-y-1/2 text-black bg-white/80 rounded-full p-2 hover:bg-white transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
         <div class="flex items-center justify-center h-full">
-          <img id="timelinePhoto" src="" alt="时间线照片" class="max-w-full max-h-[80vh] object-contain rounded">
+          <img id="timelinePhoto" src="" alt="时间线照片" class="max-w-full max-h-[70vh] object-contain rounded">
         </div>
       </div>
     </div>
@@ -1428,8 +1411,28 @@
           });
         });
         
-        // 照片点击效果已移至页面底部，使用适中尺寸模态框显示
+        // 照片点击放大效果
+        document.querySelectorAll('.photo-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const viewer = document.getElementById('image-viewer');
+            const viewedImg = document.getElementById('viewed-image');
+            
+            viewedImg.src = img.src;
+            viewedImg.alt = img.alt;
+            viewer.classList.remove('hidden');
+            viewer.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+          });
+        });
         
+        // 关闭图片查看器
+        document.getElementById('close-viewer').addEventListener('click', () => {
+          const viewer = document.getElementById('image-viewer');
+          viewer.classList.add('hidden');
+          viewer.classList.remove('flex');
+          document.body.style.overflow = '';
+        });
         
         // 点击图片查看器背景关闭
         document.getElementById('image-viewer').addEventListener('click', (e) => {
@@ -1901,124 +1904,8 @@
       }
     });
 
-    // 存储各标签页的照片
-    const photoThemes = {
-      'tab1': ['img/photo1.jpg', 'img/photo2.jpg', 'img/photo3.jpg'],
-      'tab2': ['img/couple1.jpg', 'img/couple2.jpg', 'img/couple3.jpg', 'img/couple4.jpg', 'img/couple5.jpg', 'img/couple6.jpg'],
-      'tab3': ['img/photo4.jpg', 'img/photo5.jpg', 'img/photo6.jpg']
-    };
-
-    // 当前查看的照片信息
-    let currentPhotoInfo = {
-      src: '',
-      theme: 'tab1'
-    };
-
-    // 确定当前照片所属的标签页和索引
-    function determineCurrentPhotoInfo(imgSrc) {
-      for (const theme in photoThemes) {
-        const index = photoThemes[theme].findIndex(src => src === imgSrc);
-        if (index !== -1) {
-          return {
-            theme: theme,
-            index: index
-          };
-        }
-      }
-      return {
-        theme: 'tab1',
-        index: 0
-      };
-    }
-
-    // 更新导航按钮的可见性
-    function updateNavButtonsVisibility() {
-      const prevBtn = document.getElementById('prevPhoto');
-      const nextBtn = document.getElementById('nextPhoto');
-      const info = determineCurrentPhotoInfo(currentPhotoInfo.src);
-      const photos = photoThemes[info.theme];
-      
-      // 当是第一张图片时隐藏上一张按钮
-      prevBtn.classList.toggle('hidden', info.index === 0);
-      // 当是最后一张图片时隐藏下一张按钮
-      nextBtn.classList.toggle('hidden', info.index === photos.length - 1);
-    }
-
-    // 导航到上一张或下一张照片
-    function navigatePhotos(direction) {
-      const info = determineCurrentPhotoInfo(currentPhotoInfo.src);
-      const photos = photoThemes[info.theme];
-      let newIndex = info.index + direction;
-      
-      // 确保索引在有效范围内
-      if (newIndex >= 0 && newIndex < photos.length) {
-        currentPhotoInfo.src = photos[newIndex];
-        document.getElementById('timelinePhoto').src = currentPhotoInfo.src;
-        updateNavButtonsVisibility();
-      }
-    }
-
-    // 重写openTimelinePhoto函数以支持导航功能
-    function openTimelinePhoto(imgSrc, source = 'gallery') {
-      const modal = document.getElementById('timelinePhotoModal');
-      const photo = document.getElementById('timelinePhoto');
-      const prevBtn = document.getElementById('prevPhoto');
-      const nextBtn = document.getElementById('nextPhoto');
-      
-      photo.src = imgSrc;
-      currentPhotoInfo.src = imgSrc;
-      
-      // 获取当前活动的标签页
-      const activeTab = document.querySelector('.gallery-tab.active').dataset.tab;
-      currentPhotoInfo.theme = activeTab;
-      
-      // 添加淡入动画效果
-      modal.classList.remove('hidden');
-      setTimeout(() => {
-        modal.classList.add('opacity-100');
-      }, 10);
-      
-      // 根据来源决定是否显示导航按钮
-      if (source === 'gallery') {
-        prevBtn.classList.remove('hidden');
-        nextBtn.classList.remove('hidden');
-        // 更新导航按钮可见性
-        updateNavButtonsVisibility();
-      } else {
-        // 时间线照片隐藏导航按钮
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
-      }
-      
-      // 防止背景滚动
-      document.body.style.overflow = 'hidden';
-    }
-
     // 页面加载完成后初始化
     document.addEventListener('DOMContentLoaded', init);
-    
-    // 为相册区域的照片添加点击事件
-    document.querySelectorAll('.photo-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        if (img) {
-          openTimelinePhoto(img.src, 'gallery');
-        }
-      });
-    });
-    
-    // 为时间线区域的照片重新绑定点击事件，传入source参数
-    document.querySelectorAll('[onclick^="openTimelinePhoto\(\']').forEach(element => {
-      const onclickAttr = element.getAttribute('onclick');
-      const imgSrcMatch = onclickAttr.match(/openTimelinePhoto\('([^']+)'\)/);
-      if (imgSrcMatch && imgSrcMatch[1]) {
-        const imgSrc = imgSrcMatch[1];
-        element.removeAttribute('onclick');
-        element.addEventListener('click', () => {
-          openTimelinePhoto(imgSrc, 'timeline');
-        });
-      }
-    });
   </script>
 </body>
 </html>
