@@ -1399,13 +1399,35 @@
         function initBackgroundMusic() {
             if (!bgAudio) {
                 try {
-                    bgAudio = new Audio('/love_song.mp3');
+                    // 使用相对路径，优先尝试直接访问根目录的文件
+                    // 如果失败，则尝试music目录下的文件
+                    bgAudio = new Audio('./love_song.mp3');
+                    bgAudio.onerror = function() {
+                        console.log('尝试从music目录加载音乐...');
+                        bgAudio = new Audio('./music/love_song.mp3');
+                        bgAudio.loop = true;
+                        bgAudio.volume = 0.3;
+                        retryPlayMusic(); // 尝试重新播放
+                    };
                     bgAudio.loop = true; // 设置循环播放
                     bgAudio.volume = 0.3; // 设置音量
                 } catch (e) {
                     console.error('初始化背景音乐失败:', e);
                     throw e;
                 }
+            }
+        }
+        
+        // 重试播放音乐
+        function retryPlayMusic() {
+            if (!STATE.isMusicPlaying) {
+                bgAudio.play().then(() => {
+                    STATE.isMusicPlaying = true;
+                    // 更新UI状态
+                    ELEMENTS.playMusic.innerHTML = '<i class="fa fa-pause"></i><span>暂停音乐</span>';
+                }).catch(error => {
+                    console.error('重新播放音乐失败:', error);
+                });
             }
         }
         
@@ -1676,12 +1698,54 @@
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', checkVisibility);
 
-        // 全局点击一次性触发音乐播放
+        // 增强版：多种用户交互方式触发音乐播放
+        // 点击事件
         document.addEventListener('click', () => {
           if (!STATE.isMusicPlaying) {
             playMusic();
           }
         }, { once: true });
+        
+        // 触摸事件 - 移动设备支持
+        document.addEventListener('touchstart', () => {
+          if (!STATE.isMusicPlaying) {
+            playMusic();
+          }
+        }, { once: true });
+        
+        // 键盘事件
+        document.addEventListener('keydown', () => {
+          if (!STATE.isMusicPlaying) {
+            playMusic();
+          }
+        }, { once: true });
+        
+        // 日期表单提交事件也触发音乐播放
+        ELEMENTS.passwordForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const enteredDate = ELEMENTS.anniversaryDate.value;
+          if (enteredDate === CONFIG.CORRECT_ANNIVERSARY) {
+            // 显示主内容
+            ELEMENTS.passwordPage.classList.add('hidden');
+            ELEMENTS.mainContent.classList.remove('hidden');
+            
+            // 触发音乐播放（即使之前没有播放成功）
+            if (!STATE.isMusicPlaying) {
+              playMusic();
+            }
+            
+            // 保存日期到本地存储
+            localStorage.setItem('anniversaryDate', enteredDate);
+            // 更新纪念日
+            updateAnniversaryDate(enteredDate);
+          } else {
+            ELEMENTS.errorMessage.classList.remove('hidden');
+            // 3秒后隐藏错误信息
+            setTimeout(() => {
+              ELEMENTS.errorMessage.classList.add('hidden');
+            }, 3000);
+          }
+        });
 
         // 土味情话数组
         const LOVE_PHRASES = [
