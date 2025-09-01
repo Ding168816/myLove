@@ -1699,26 +1699,28 @@
         window.addEventListener('resize', checkVisibility);
 
         // 增强版：多种用户交互方式触发音乐播放
-        // 点击事件
-        document.addEventListener('click', () => {
-          if (!STATE.isMusicPlaying) {
+        // 点击事件 - 移除once选项，确保每次点击都能触发（当音乐未播放时）
+        document.addEventListener('click', (e) => {
+          // 避免与播放音乐按钮的点击事件冲突
+          if (!STATE.isMusicPlaying && !e.target.closest('#play-music')) {
             playMusic();
           }
-        }, { once: true });
+        });
         
         // 触摸事件 - 移动设备支持
-        document.addEventListener('touchstart', () => {
-          if (!STATE.isMusicPlaying) {
+        document.addEventListener('touchstart', (e) => {
+          // 避免与播放音乐按钮的点击事件冲突
+          if (!STATE.isMusicPlaying && !e.target.closest('#play-music')) {
             playMusic();
           }
-        }, { once: true });
+        });
         
         // 键盘事件
         document.addEventListener('keydown', () => {
           if (!STATE.isMusicPlaying) {
             playMusic();
           }
-        }, { once: true });
+        });
         
         // 日期表单提交事件也触发音乐播放
         ELEMENTS.passwordForm.addEventListener('submit', function(e) {
